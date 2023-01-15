@@ -13,12 +13,10 @@ exports.Query = {
     }
     return filteredProducts;
   },
-
   //
   product: (parent, { productId }, { products }) => {
     return (product = products.find((product) => product.id === productId));
   },
-
   //
   categories: (parent, args, { categories }) => {
     return categories;
