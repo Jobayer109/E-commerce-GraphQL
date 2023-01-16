@@ -1,5 +1,3 @@
-const { products, categories } = require("../db");
-
 exports.Query = {
   products: (parent, { filter }, { db }) => {
     let filteredProducts = db.products;
@@ -18,7 +16,7 @@ exports.Query = {
     return (product = db.products.find((product) => product.id === productId));
   },
   //
-  categories: (parent, args, { categories }) => {
+  categories: (parent, args, { db }) => {
     return db.categories;
   },
 

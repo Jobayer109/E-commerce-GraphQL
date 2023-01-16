@@ -40,4 +40,28 @@ exports.Mutation = {
     db.reviews.push(newReview);
     return newReview;
   },
+
+  deleteCategory: (parent, { id }, { db }) => {
+    db.categories = db.categories.filter((category) => category.id !== id);
+    db.products = db.products.map((product) => {
+      if (product.id === id)
+        return {
+          ...product,
+          productId: null,
+        };
+      else return product;
+    });
+    return true;
+  },
+
+  deleteProduct: (parent, { id }, { db }) => {
+    db.products = db.products.filter((product) => product.id !== id);
+    db.reviews = db.reviews.filter((review) => review.productId !== id);
+    return true;
+  },
+
+  deleteReview: (parent, { id }, { db }) => {
+    db.reviews = db.reviews.filter((review) => review.id !== id);
+    return true;
+  },
 };
