@@ -1,8 +1,8 @@
 const { products, categories } = require("../db");
 
 exports.Query = {
-  products: (parent, { filter }, { products }) => {
-    let filteredProducts = products;
+  products: (parent, { filter }, { db }) => {
+    let filteredProducts = db.products;
 
     if (filter) {
       if (filter.onSale === true) {
@@ -14,16 +14,16 @@ exports.Query = {
     return filteredProducts;
   },
   //
-  product: (parent, { productId }, { products }) => {
-    return (product = products.find((product) => product.id === productId));
+  product: (parent, { productId }, { db }) => {
+    return (product = db.products.find((product) => product.id === productId));
   },
   //
   categories: (parent, args, { categories }) => {
-    return categories;
+    return db.categories;
   },
 
   //
-  category: (parent, { id }, { categories }) => {
-    return (category = categories.find((category) => category.id === id));
+  category: (parent, { id }, { db }) => {
+    return (category = db.categories.find((category) => category.id === id));
   },
 };
